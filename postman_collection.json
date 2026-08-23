@@ -1,0 +1,180 @@
+{
+  "info": {
+    "name": "Coffee & Bagels REST API (Eishan Nangia 3rd Year Project)",
+    "description": "Complete REST API Postman Collection featuring OTP Engine, Table Reservations, Admin Auth (JWT), Menu CRUD, and Audit Logs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Public Endpoints",
+      "item": [
+        {
+          "name": "1. Fetch Menu Items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/menu",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "menu"]
+            }
+          }
+        },
+        {
+          "name": "2. Send Dynamic Server OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"8708123306\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/otp/send",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "otp", "send"]
+            }
+          }
+        },
+        {
+          "name": "3. Verify OTP Code",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"8708123306\",\n  \"otp\": \"1234\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/otp/verify",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "otp", "verify"]
+            }
+          }
+        },
+        {
+          "name": "4. Submit Table Reservation",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Eishan Nangia\",\n  \"phone\": \"8708123306\",\n  \"date\": \"2026-08-25\",\n  \"time\": \"6:00 PM\",\n  \"party_size\": 2,\n  \"notes\": \"Window seat preferred\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/reservations",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "reservations"]
+            }
+          }
+        },
+        {
+          "name": "5. Fetch Customer Reviews",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/reviews",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "reviews"]
+            }
+          }
+        },
+        {
+          "name": "6. Admin Login (Get JWT)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Protected Admin Endpoints (Requires JWT)",
+      "item": [
+        {
+          "name": "1. Fetch Dashboard Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/stats",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "admin", "stats"]
+            }
+          }
+        },
+        {
+          "name": "2. Fetch All System Audit Logs",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/logs",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "admin", "logs"]
+            }
+          }
+        },
+        {
+          "name": "3. Add New Menu Item (CRUD Create)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"coffee\",\n  \"name\": \"Amritsari Cold Coffee\",\n  \"price\": 180,\n  \"tag\": \"Special\",\n  \"description\": \"Rich espresso blended with chilled milk & chocolate syrup\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/admin/menu",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "admin", "menu"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

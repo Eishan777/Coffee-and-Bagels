@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — Coffee&amp;Bagels</title>
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,500&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="login-body">
+
+<div class="login-card">
+  <img class="logo-img" src="assets/logo.png" alt="Coffee &amp; Bagels">
+  <h1>Admin Portal</h1>
+  <p class="sub">Log in to manage reservations, menu items &amp; analytics</p>
+
+  <div class="error-box" id="errorBox"></div>
+
+  <form id="loginForm">
+    <div class="field">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="admin" required autocomplete="username">
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+    </div>
+    <button type="submit" class="btn">Log In</button>
+  </form>
+
+  <div class="demo-credentials">
+    <strong>Project Demo Credentials:</strong><br>
+    Username: <code>admin</code><br>
+    Password: <code>admin123</code>
+  </div>
+
+  <a href="index.html" class="back-home">← Back to Customer Site</a>
+  <p style="margin-top:24px; font-family:'Space Mono', monospace; font-size:0.75rem; color:#8a736a;">© 2026 Coffee&amp;Bagels · Designed &amp; Developed by Eishan Nangia</p>
+</div>
+
+<script src="js/login.js"></script>
+</body>
+</html>

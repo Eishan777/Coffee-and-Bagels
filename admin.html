@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Coffee&amp;Bagels</title>
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,500&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<header class="admin-header">
+  <div class="header-left">
+    <img src="assets/logo.png" alt="Logo">
+    <h1>Coffee&amp;Bagels — Admin Portal</h1>
+  </div>
+  <div class="header-right">
+    <span class="user-badge" id="userBadge">Admin</span>
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+  </div>
+</header>
+
+<main class="admin-main">
+
+  <!-- Live Stats Grid -->
+  <div class="stats-grid">
+    <div class="stat-card pending-card">
+      <span class="label">Pending Bookings</span>
+      <span class="num" id="statPending">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="label">Today's Bookings</span>
+      <span class="num" id="statToday">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="label">Total Reservations</span>
+      <span class="num" id="statTotalRes">0</span>
+    </div>
+    <div class="stat-card">
+      <span class="label">Total Menu Items</span>
+      <span class="num" id="statMenu">0</span>
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" data-tab="tab-reservations">Table Bookings</button>
+    <button class="tab-btn" data-tab="tab-menu">Menu Management (CRUD)</button>
+    <button class="tab-btn" data-tab="tab-reviews">Customer Reviews</button>
+    <button class="tab-btn" data-tab="tab-logs">System Audit Logs</button>
+  </div>
+
+  <!-- TAB 1: RESERVATIONS -->
+  <div class="tab-panel active" id="tab-reservations">
+    <div class="table-box">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Phone</th>
+            <th>Date &amp; Time</th>
+            <th>Guests</th>
+            <th>Notes</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="reservationsBody">
+          <tr><td colspan="8" style="text-align:center;">Loading reservations...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB 2: MENU MANAGEMENT -->
+  <div class="tab-panel" id="tab-menu">
+    <!-- Add New Item Form -->
+    <div class="add-item-box">
+      <h3>Add New Menu Item</h3>
+      <form id="addMenuForm">
+        <div class="form-row">
+          <select id="newItemCat" required>
+            <option value="bagels">Bagels</option>
+            <option value="coffee">Coffee &amp; Frappes</option>
+            <option value="plates">Sandwiches &amp; Plates</option>
+            <option value="sweets">Sweets</option>
+          </select>
+          <input type="text" id="newItemName" placeholder="Item Name" required>
+          <input type="number" id="newItemPrice" placeholder="Price (₹)" step="1" required>
+          <input type="text" id="newItemTag" placeholder="Tag (e.g. Special)">
+        </div>
+        <div class="form-row">
+          <input type="text" id="newItemDesc" placeholder="Description" style="grid-column: span 2;">
+          <button type="submit" class="btn-submit">Add Item</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Menu Items Table -->
+    <div class="table-box">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Category</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Tag</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="menuBody">
+          <tr><td colspan="7" style="text-align:center;">Loading menu items...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB 3: REVIEWS -->
+  <div class="tab-panel" id="tab-reviews">
+    <div class="table-box">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Author</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>Source</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="reviewsBody">
+          <tr><td colspan="6" style="text-align:center;">Loading customer reviews...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  <!-- TAB 4: SYSTEM AUDIT LOGS -->
+  <div class="tab-panel" id="tab-logs">
+    <div class="table-box">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Event Type</th>
+            <th>Details</th>
+            <th>IP Address</th>
+            <th>Timestamp</th>
+          </tr>
+        </thead>
+        <tbody id="logsBody">
+          <tr><td colspan="5" style="text-align:center;">Loading system audit logs...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
