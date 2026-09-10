@@ -152,5 +152,5 @@ This repository includes a ready-to-import Postman Collection file: `postman_col
 
 ## 👤 Author
 
-**Eishan Nangia**  
+**Eishan, Gagan, Ansh, Harkirat**  
 3rd-Year Computer Science / Software Engineering Student
