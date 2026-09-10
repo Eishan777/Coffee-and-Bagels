@@ -42,3 +42,115 @@ Designed and Developed by **Eishan Nangia**.
 ---
 
 ## 📁 Repository Structure
+
+```
+.
+├── assets/                  # High-res logos & media assets
+├── css/
+│   ├── style.css            # Customer homepage design system & styles
+│   ├── reservations.css     # Stepper progress & booking form styles
+│   └── admin.css            # Admin dashboard, tables, & login styles
+├── js/
+│   ├── main.js              # Dynamic menu loading, reviews, carousel, lightbox
+│   ├── reservations.js      # Booking stepper, server OTP API call, WhatsApp link
+│   ├── login.js             # Admin login & JWT token storage
+│   └── admin.js             # Admin stats, booking status, menu CRUD & audit logs
+├── server/
+│   ├── db.js                # SQLite database setup, table schemas, and seeder
+│   └── routes/
+│       ├── api.js           # Public REST API (OTP engine, Menu, Reservations, Reviews)
+│       └── admin.js         # Protected Admin REST API (Stats, Reservations, CRUD, Logs)
+├── index.html               # Main Customer Homepage
+├── reservations.html        # Table Booking & Verification Page
+├── login.html               # Admin Login Portal
+├── admin.html               # Admin Dashboard & Audit Logs Portal
+├── server.js                # Main Express server entry point
+├── database.sqlite          # SQLite database storage file
+├── postman_collection.json  # Exported Postman REST API Collection
+├── sample_dataset.json      # Structured dataset JSON file
+└── package.json             # Node.js dependencies & scripts
+```
+
+---
+
+## 🚦 Local Setup & Installation
+
+### Prerequisites
+- Node.js (v16.0.0 or higher) installed on your machine.
+
+### Installation Steps
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-username/coffee-and-bagels-fullstack.git
+   cd coffee-and-bagels-fullstack
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the Application Server**
+   ```bash
+   npm start
+   ```
+
+4. **Access in Browser**
+   - 🌐 Customer Site: `http://localhost:8080/index.html`
+   - 📑 Table Reservations: `http://localhost:8080/reservations.html`
+   - 🔐 Admin Login: `http://localhost:8080/login.html`
+   - 📊 Admin Portal: `http://localhost:8080/admin.html`
+
+---
+
+## 🔑 Demo Credentials
+
+- **Admin Username**: `admin`
+- **Admin Password**: `admin123`
+
+---
+
+## 📡 REST API Documentation
+
+### Public API Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/menu` | Fetch all available menu items (filtered by `?category=`) |
+| `POST` | `/api/otp/send` | Generates a 4-digit random OTP, saves it in SQLite with 5-min expiry, logs to console |
+| `POST` | `/api/otp/verify` | Validates customer OTP code against SQLite records |
+| `POST` | `/api/reservations` | Submit a new table booking |
+| `GET` | `/api/reviews` | Stream latest customer reviews |
+| `POST` | `/api/reviews` | Submit a new customer review |
+| `POST` | `/api/auth/login` | Authenticate admin credentials & receive JWT token |
+
+### Protected Admin API Endpoints (`Authorization: Bearer <token>`)
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/admin/stats` | Fetch real-time dashboard analytics counters |
+| `GET` | `/api/admin/reservations` | List all customer table bookings |
+| `PATCH` | `/api/admin/reservations/:id` | Update booking status (`confirmed` or `cancelled`) |
+| `GET` | `/api/admin/menu` | List all menu items for management |
+| `POST` | `/api/admin/menu` | Create a new menu item |
+| `PUT` | `/api/admin/menu/:id` | Update an existing menu item |
+| `DELETE` | `/api/admin/menu/:id` | Delete a menu item |
+| `GET` | `/api/admin/logs` | Fetch real-time system audit logs |
+
+---
+
+## 🧪 Testing APIs in Postman
+
+This repository includes a ready-to-import Postman Collection file: `postman_collection.json`.
+
+1. Open **Postman**.
+2. Click **Import** -> Select `postman_collection.json`.
+3. Test all pre-configured endpoints (`/api/menu`, `/api/otp/send`, `/api/otp/verify`, `/api/auth/login`, etc.).
+
+---
+
+## 👤 Author
+
+**Eishan Nangia**  
+3rd-Year Computer Science / Software Engineering Student

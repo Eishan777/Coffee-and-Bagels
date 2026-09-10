@@ -1,0 +1,27 @@
+{
+  "name": "coffee-and-bagels-fullstack",
+  "version": "1.0.0",
+  "description": "Full-Stack Coffee Shop Web Application with Express, SQLite3, REST API, and Admin Portal",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "express",
+    "sqlite3",
+    "fullstack",
+    "rest-api",
+    "jwt"
+  ],
+  "author": "Ridhi",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^9.0.6",
+    "sqlite3": "^5.1.7"
+  }
+}

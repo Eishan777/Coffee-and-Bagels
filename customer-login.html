@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Login &amp; Sign Up — Coffee&amp;Bagels</title>
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,500&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css">
+<style>
+  .google-btn {
+    width: 100%; padding: 12px; border-radius: 99px; background: #fff; color: #333;
+    border: 1.5px solid var(--line); font-weight: 600; font-size: 0.95rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform .15s ease;
+  }
+  .google-btn:hover { transform: translateY(-2px); border-color: var(--crust-deep); }
+  .divider {
+    display: flex; align-items: center; text-align: center; color: #8a736a;
+    font-size: 0.78rem; font-family: 'Space Mono', monospace; text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--line); }
+  .divider span { padding: 0 10px; }
+  .code-step { display: none; }
+  .code-step.active { display: block; }
+  .code-note {
+    background: rgba(242, 169, 59, 0.2); border: 1.5px dashed rgba(168, 95, 40, 0.5);
+    border-radius: 12px; padding: 12px 14px; font-size: 0.85rem; color: #6b4317; margin-bottom: 18px;
+    text-align: left; line-height: 1.4;
+  }
+</style>
+</head>
+<body class="login-body">
+
+<div class="login-card">
+  <img class="logo-img" src="assets/logo.png" alt="Coffee &amp; Bagels">
+  <h1>Welcome Regulars</h1>
+  <p class="sub">Sign up or log in to manage your bookings &amp; rewards</p>
+
+  <div class="error-box" id="errorBox"></div>
+
+  <!-- Google Sign-In -->
+  <button type="button" class="google-btn" id="googleLoginBtn">
+    <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+    Continue with Google
+  </button>
+
+  <div class="divider"><span>OR WITH EMAIL</span></div>
+
+  <!-- Email Verification Code Flow -->
+  <div id="emailStep" class="code-step active">
+    <form id="sendCodeForm">
+      <div class="field">
+        <label for="customerEmail">Email Address</label>
+        <input type="email" id="customerEmail" placeholder="e.g. eishan@gmail.com" required autocomplete="email">
+      </div>
+      <button type="submit" class="btn">Send Verification Code</button>
+    </form>
+  </div>
+
+  <div id="codeStep" class="code-step">
+    <div class="code-note">
+      📧 <strong>Testing Verification Code:</strong> <code id="demoCodeDisplay" style="font-size:1.1rem; font-weight:bold; color:var(--brick); letter-spacing:2px;">----</code>
+      <div style="font-size:0.75rem; color:#8a5a2b; margin-top:4px;">Dispatched to email gateway &amp; displayed above for instant testing.</div>
+    </div>
+    <form id="verifyCodeForm">
+      <div class="field">
+        <label for="emailCode">Enter 4-Digit Code</label>
+        <input type="text" id="emailCode" placeholder="1234" maxlength="4" required inputmode="numeric">
+      </div>
+      <button type="submit" class="btn">Verify &amp; Log In</button>
+      <button type="button" id="changeEmailBtn" style="background:none; border:none; color:var(--crust-deep); margin-top:10px; cursor:pointer; font-size:0.85rem;">← Change Email</button>
+    </form>
+  </div>
+
+  <a href="index.html" class="back-home">← Back to Customer Site</a>
+  <p style="margin-top:24px; font-family:'Space Mono', monospace; font-size:0.72rem; color:#8a736a;">© 2026 Coffee&amp;Bagels · Designed &amp; Developed by Eishan Nangia</p>
+</div>
+
+<script src="js/customer-login.js"></script>
+</body>
+</html>

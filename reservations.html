@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reserve a Table — Coffee&amp;Bagels</title>
-<meta name="description" content="Hold your spot at Coffee&Bagels, Ranjit Avenue, Amritsar.">
+<title>Reserve a Table — Coffee&amp;Bagels® Ranjit Avenue</title>
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/reservations.css">
 </head>
 <body>
@@ -16,144 +16,146 @@
 <header>
   <div class="nav">
     <a href="index.html" class="brand">
-      <img src="assets/logo.png" alt="Coffee &amp; Bagels">
+      <img class="brand-mark" src="assets/logo.png" alt="Coffee &amp; Bagels logo">
       <span class="brand-name">Coffee<em>&amp;</em>Bagels</span>
     </a>
-    <a class="back-link" href="index.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Back to site
-    </a>
+    <nav class="links">
+      <a href="index.html#about">The Space</a>
+      <a href="index.html#menu">Menu</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#reviews">Reviews</a>
+      <a href="index.html#visit">Visit</a>
+    </nav>
+    <a class="nav-cta" href="index.html">← Back to Site</a>
   </div>
 </header>
 
-<main>
-  <div class="page-head">
-    <span class="eyebrow">Reserve a Table</span>
-    <h1>Hold your spot at Ranjit Avenue.</h1>
-    <p>Fill in your details, verify your number, and your table request goes straight to us on WhatsApp and our live reservation database.</p>
-  </div>
+<main class="res-page">
+  <div class="res-card">
 
-  <div class="stepper">
-    <div class="step-dot active" id="dot1">1</div>
-    <div class="step-line" id="line1"></div>
-    <div class="step-dot" id="dot2">2</div>
-    <div class="step-line" id="line2"></div>
-    <div class="step-dot" id="dot3">3</div>
-  </div>
-  <div class="step-labels">
-    <span>Details</span><span>Verify</span><span>Confirm</span>
-  </div>
+    <div class="res-head">
+      <h1>Reserve your table</h1>
+      <p>Ground Floor, SCO 23, Ranjit Avenue, Amritsar · Open daily 11 AM – 11 PM</p>
+    </div>
 
-  <div class="card">
-
-    <!-- STEP 1: DETAILS -->
-    <form class="panel active" id="panelDetails" novalidate>
-      <div class="field" id="f-name">
-        <label for="name">Full name</label>
-        <input type="text" id="name" placeholder="e.g. Simran Kaur" autocomplete="name">
-        <div class="err-msg">Please enter your name.</div>
+    <!-- STEPPER -->
+    <div class="stepper" id="stepper">
+      <div class="step active" data-step="1">
+        <span class="step-num">1</span>
+        <span class="step-label">Details</span>
       </div>
-
-      <div class="field" id="f-phone">
-        <label for="phone">WhatsApp / mobile number</label>
-        <input type="tel" id="phone" placeholder="98765 43210" autocomplete="tel" maxlength="10" inputmode="numeric">
-        <div class="hint">10-digit Indian mobile number — we'll send your confirmation code here.</div>
-        <div class="err-msg">Enter a valid 10-digit mobile number.</div>
+      <div class="step-line" id="line1"></div>
+      <div class="step" data-step="2">
+        <span class="step-num">2</span>
+        <span class="step-label">Verify Mobile</span>
       </div>
+      <div class="step-line" id="line2"></div>
+      <div class="step" data-step="3">
+        <span class="step-num">3</span>
+        <span class="step-label">Confirmed</span>
+      </div>
+    </div>
 
-      <div class="grid-2">
-        <div class="field" id="f-date">
-          <label for="date">Date</label>
-          <input type="date" id="date">
-          <div class="err-msg">Choose a date from today onward.</div>
+    <!-- STEP 1: FORM -->
+    <div class="panel active" id="panelForm">
+      <form id="resForm" novalidate>
+        <div class="form-grid">
+          <div class="field col-full">
+            <label for="resName">Full Name *</label>
+            <input type="text" id="resName" placeholder="e.g. Gurpreet Singh" required autocomplete="name">
+            <span class="error-msg">Please enter your name.</span>
+          </div>
+
+          <div class="field col-full">
+            <label for="resPhone">10-Digit Phone Number (SMS Verification) *</label>
+            <div class="phone-wrap">
+              <span class="phone-prefix">+91</span>
+              <input type="tel" id="resPhone" placeholder="9876543210" maxlength="10" required autocomplete="tel-national">
+            </div>
+            <span class="error-msg">Enter a valid 10-digit Indian mobile number.</span>
+          </div>
+
+          <div class="field col-half">
+            <label for="resDate">Date *</label>
+            <input type="date" id="resDate" required>
+            <span class="error-msg">Please select a date.</span>
+          </div>
+
+          <div class="field col-half">
+            <label for="resTime">Preferred Time *</label>
+            <select id="resTime" required>
+              <option value="">Select a time slot...</option>
+              <option value="11:30 AM">11:30 AM — Early lunch</option>
+              <option value="1:00 PM">1:00 PM — Peak lunch</option>
+              <option value="2:30 PM">2:30 PM — Quiet afternoon</option>
+              <option value="4:00 PM">4:00 PM — Coffee &amp; reading</option>
+              <option value="5:30 PM">5:30 PM — Evening transition</option>
+              <option value="7:00 PM">7:00 PM — Dinner</option>
+              <option value="8:30 PM">8:30 PM — Late dinner</option>
+              <option value="9:45 PM">9:45 PM — Last seating</option>
+            </select>
+            <span class="error-msg">Please select a time slot.</span>
+          </div>
+
+          <div class="field col-full">
+            <label>Party Size *</label>
+            <div class="party-pills" id="partyPills">
+              <button type="button" class="party-pill" data-val="1">1</button>
+              <button type="button" class="party-pill active" data-val="2">2</button>
+              <button type="button" class="party-pill" data-val="3">3</button>
+              <button type="button" class="party-pill" data-val="4">4</button>
+              <button type="button" class="party-pill" data-val="5">5</button>
+              <button type="button" class="party-pill" data-val="6">6+</button>
+            </div>
+            <input type="hidden" id="resParty" value="2">
+          </div>
+
+          <div class="field col-full">
+            <label for="resNotes">Special Requests (Optional)</label>
+            <textarea id="resNotes" rows="2" placeholder="Window seat, quiet corner, birthday dessert, high chair needed..."></textarea>
+          </div>
         </div>
-        <div class="field" id="f-time">
-          <label for="time">Time</label>
-          <select id="time">
-            <option value="">Select a slot</option>
-            <option>11:00 AM</option><option>11:30 AM</option>
-            <option>12:00 PM</option><option>12:30 PM</option>
-            <option>1:00 PM</option><option>1:30 PM</option>
-            <option>2:00 PM</option><option>2:30 PM</option>
-            <option>3:00 PM</option><option>3:30 PM</option>
-            <option>4:00 PM</option><option>4:30 PM</option>
-            <option>5:00 PM</option><option>5:30 PM</option>
-            <option>6:00 PM</option><option>6:30 PM</option>
-            <option>7:00 PM</option><option>7:30 PM</option>
-            <option>8:00 PM</option><option>8:30 PM</option>
-            <option>9:00 PM</option><option>9:30 PM</option>
-            <option>10:00 PM</option>
-          </select>
-          <div class="err-msg">Choose a time slot.</div>
-        </div>
-      </div>
 
-      <div class="field">
-        <label>Party size</label>
-        <div class="party-picker">
-          <button type="button" class="party-chip" data-val="1">1</button>
-          <button type="button" class="party-chip active" data-val="2">2</button>
-          <button type="button" class="party-chip" data-val="3">3</button>
-          <button type="button" class="party-chip" data-val="4">4</button>
-          <button type="button" class="party-chip" data-val="5">5</button>
-          <button type="button" class="party-chip" data-val="6">6</button>
-          <button type="button" class="party-chip" data-val="8">8+</button>
-        </div>
-      </div>
+        <button type="submit" class="btn btn-primary" style="margin-top:24px;">Continue to Verification →</button>
+      </form>
+    </div>
 
-      <div class="field">
-        <label for="notes">Special requests (optional)</label>
-        <textarea id="notes" rows="2" placeholder="Window seating, celebration, high chair, dietary preferences..."></textarea>
-      </div>
-
-      <button type="submit" class="btn btn-primary" style="margin-top:10px;">
-        Continue to phone verification
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </form>
-
-    <!-- STEP 2: OTP VERIFICATION -->
+    <!-- STEP 2: VERIFY OTP -->
     <div class="panel" id="panelOtp">
-      <div class="otp-head">
-        <span class="eyebrow">Verify your number</span>
-        <h2>We just sent you a code.</h2>
-        <p>Enter the 4-digit code sent to <strong id="otpPhoneDisplay">+91 00000 00000</strong></p>
-      </div>
+      <div class="otp-card">
+        <h3>Verify your phone number</h3>
+        <p>A 4-digit OTP has been sent via SMS to <strong>+91 <span id="otpPhoneDisplay"></span></strong>.</p>
 
-      <div class="otp-note">
-        <strong>Demo Mode active:</strong> Your 4-digit verification code is <code id="demoOtpCode" style="font-size:1rem; font-weight:700; color:var(--brick);">----</code>.
-      </div>
+        <div class="otp-note">
+          📲 <strong>Testing OTP Code:</strong> <code id="demoOtpCode" style="font-size:1.2rem; font-weight:bold; color:var(--brick); letter-spacing:2px;">----</code>
+          <div style="font-size:0.75rem; color:#8a5a2b; margin-top:4px;">Dispatched to SMS gateway &amp; displayed above for instant testing.</div>
+        </div>
 
-      <div class="otp-inputs">
-        <input type="text" class="otp-box" maxlength="1" inputmode="numeric" autocomplete="one-time-code">
-        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
-        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
-        <input type="text" class="otp-box" maxlength="1" inputmode="numeric">
-      </div>
+        <div class="otp-boxes" id="otpBoxes">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-input" autocomplete="one-time-code">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-input">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-input">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="otp-input">
+        </div>
 
-      <div class="field" style="text-align:center; margin-bottom:14px;">
-        <div class="err-msg" id="otpError" style="display:none;">Invalid code. Please try again.</div>
-      </div>
+        <div class="otp-error" id="otpError">Incorrect code. Please try again.</div>
 
-      <button type="button" class="btn btn-primary" id="verifyBtn">
-        Verify and proceed
-      </button>
+        <button type="button" class="btn btn-primary" id="verifyBtn" style="margin-top:20px;">Verify &amp; Continue →</button>
 
-      <div class="otp-resend">
-        Didn't receive code? <button type="button" id="resendBtn">Resend code<span id="resendTimer"></span></button>
-      </div>
+        <div class="timer-row">
+          <span>Resend code in <strong id="timer">00:30</strong></span>
+          <button type="button" class="resend-btn" id="resendBtn" disabled>Resend OTP</button>
+        </div>
 
-      <div class="btn-row">
-        <button type="button" class="btn btn-ghost" id="backToDetails">← Edit details</button>
+        <button type="button" class="change-phone-btn" id="changePhoneBtn">← Change Phone Number</button>
       </div>
     </div>
 
     <!-- STEP 3: CONFIRMATION -->
     <div class="panel" id="panelConfirm">
-      <div class="otp-head">
-        <span class="eyebrow">All set</span>
-        <h2>Confirm your table request.</h2>
-        <p>Review your booking summary before we send your request to the café team.</p>
+      <div style="text-align:center; margin-bottom:20px;">
+        <span class="status-badge status-confirmed">✓ Phone Number Verified</span>
+        <h2 style="font-family:'Fraunces', serif; font-size:1.6rem; color:var(--ink); margin-top:12px;">Confirm your reservation</h2>
       </div>
 
       <div class="summary-list" id="summaryList"></div>
@@ -172,8 +174,10 @@
     <div class="panel" id="panelSuccess">
       <div class="success-state">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
-        <h2>Request saved &amp; sent!</h2>
-        <p>Your reservation is securely recorded in our database and WhatsApp was opened with your booking details.</p>
+        <h2>Thank you for booking!</h2>
+        <p style="font-size:1.05rem; font-weight:600; color:var(--ink); margin-top:8px;">Here are your reservation details:</p>
+        <div class="summary-list" id="successSummaryList" style="text-align:left; max-width:440px; margin:20px auto; background:var(--paper); padding:18px 24px; border-radius:16px;"></div>
+        <p style="font-size:0.88rem; color:#5a453d;">A confirmation message has been generated for <strong>+91 <span id="successPhone"></span></strong> and sent via WhatsApp.</p>
         <a href="index.html" class="btn btn-ghost" style="margin-top:24px; display:inline-flex; width:auto; padding-left:32px; padding-right:32px;">Back to site</a>
       </div>
     </div>
@@ -181,7 +185,7 @@
   </div>
 </main>
 
-<footer>© 2026 Coffee&amp;Bagels, Ranjit Avenue, Amritsar · Designed &amp; Developed by Eishan Nangia</footer>
+<footer>© 2026 Coffee&amp;Bagels, Ranjit Avenue, Amritsar · Designed &amp; Developed by Eishan Nangia · <a href="login.html" style="color:var(--cream); text-decoration:underline;">Admin Portal</a></footer>
 
 <script src="js/reservations.js"></script>
 </body>
