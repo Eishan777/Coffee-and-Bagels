@@ -6,7 +6,7 @@
 ![Authentication](https://img.shields.io/badge/Auth-JWT%20%2B%20bcryptjs-red)
 ![License](https://img.shields.io/badge/License-ISC-purple)
 
-A full-stack, backend-specialized web application for café management and online table reservations, featuring a dynamic **Server-Side OTP Engine**, **System Activity Audit Logging**, **REST API architecture**, **JWT Authentication**, and an interactive **Admin Management Portal**.
+A full-stack, backend-specialized web application for café management and online table reservations, featuring a dynamic **Server-Side OTP Engine**, **Customer Authentication (Google Sign-In + Email Verification Code)**, **System Activity Audit Logging**, **REST API architecture**, **JWT Authentication**, and an interactive **Admin Management Portal**.
 
 Designed and Developed by **Eishan Nangia**.
 
@@ -14,11 +14,12 @@ Designed and Developed by **Eishan Nangia**.
 
 ## 🚀 Key Features
 
-### 🌐 Customer Portal (`/index.html` & `/reservations.html`)
+### 🌐 Customer Portal (`/index.html`, `/customer-login.html`, `/reservations.html`)
+- **Customer Authentication**: Support for **Google Sign-In (OAuth 2.0)** and dynamic **Email Verification Code dispatches**.
 - **Dynamic REST API Menu**: Fetches categorized menu items, prices, and tags live from SQLite via `GET /api/menu`.
 - **Server-Side Dynamic OTP Engine**: Generates a random 4-digit verification code on the server (`POST /api/otp/send`), stores it with a 5-minute expiration timestamp, and validates customer submissions via `POST /api/otp/verify`.
 - **API Rate Limiting**: Protects OTP generation endpoints against brute-force attacks (maximum 3 requests per phone number within 10 minutes).
-- **Direct WhatsApp Confirmation**: Generates a pre-filled WhatsApp table reservation link targeting **`+91 8708123306`**.
+- **Direct WhatsApp Confirmation**: Generates a pre-filled WhatsApp table reservation link targeting the customer's mobile number.
 - **Interactive Review Streaming**: Stream customer feedback live from the database (`GET /api/reviews`) and submit new reviews directly (`POST /api/reviews`).
 - **Media Gallery Lightbox & Carousel**: Smooth UI transitions, image overlays, and scroll progress tracking.
 
@@ -27,7 +28,7 @@ Designed and Developed by **Eishan Nangia**.
 - **Real-Time Analytics Counters**: Instant counters for Pending Bookings, Today's Bookings, Total Reservations, and Menu Items.
 - **Reservation Processing**: Approve (`confirmed`) or Cancel (`cancelled`) customer bookings with real-time status updates in SQLite.
 - **Full Menu CRUD**: Add new items, update prices/descriptions, or remove items dynamically from the live database.
-- **System Activity Audit Logs**: View real-time timestamped audit logs (`activity_logs` table) tracking server dispatches, OTP verifications, reservation creations, and admin logins.
+- **System Activity Audit Logs**: View real-time timestamped audit logs (`activity_logs` table) tracking server dispatches, OTP verifications, reservation creations, customer logins, and admin actions.
 
 ---
 
@@ -51,16 +52,21 @@ Designed and Developed by **Eishan Nangia**.
 │   ├── reservations.css     # Stepper progress & booking form styles
 │   └── admin.css            # Admin dashboard, tables, & login styles
 ├── js/
-│   ├── main.js              # Dynamic menu loading, reviews, carousel, lightbox
+│   ├── main.js              # Dynamic menu loading, reviews, carousel, lightbox, customer session
+│   ├── customer-login.js    # Customer Google Sign-In and Email Verification Code script
 │   ├── reservations.js      # Booking stepper, server OTP API call, WhatsApp link
 │   ├── login.js             # Admin login & JWT token storage
 │   └── admin.js             # Admin stats, booking status, menu CRUD & audit logs
 ├── server/
 │   ├── db.js                # SQLite database setup, table schemas, and seeder
-│   └── routes/
-│       ├── api.js           # Public REST API (OTP engine, Menu, Reservations, Reviews)
-│       └── admin.js         # Protected Admin REST API (Stats, Reservations, CRUD, Logs)
+│   ├── routes/
+│   │   ├── api.js           # Public REST API (Customer Auth, OTP engine, Menu, Reservations, Reviews)
+│   │   └── admin.js         # Protected Admin REST API (Stats, Reservations, CRUD, Logs)
+│   └── services/
+│       ├── smsService.js    # SMS Gateway Dispatcher Service (Fast2SMS / Twilio)
+│       └── emailService.js  # Email Verification Dispatcher Service (Resend / Nodemailer)
 ├── index.html               # Main Customer Homepage
+├── customer-login.html      # Customer Login & Sign Up Portal
 ├── reservations.html        # Table Booking & Verification Page
 ├── login.html               # Admin Login Portal
 ├── admin.html               # Admin Dashboard & Audit Logs Portal
@@ -98,8 +104,9 @@ Designed and Developed by **Eishan Nangia**.
 
 4. **Access in Browser**
    - 🌐 Customer Site: `http://localhost:8080/index.html`
+   - 🔑 Customer Auth: `http://localhost:8080/customer-login.html`
    - 📑 Table Reservations: `http://localhost:8080/reservations.html`
-   - 🔐 Admin Login: `http://localhost:8080/login.html`
+   - 🔐 Admin Login (Footer Link): `http://localhost:8080/login.html`
    - 📊 Admin Portal: `http://localhost:8080/admin.html`
 
 ---
@@ -118,7 +125,10 @@ Designed and Developed by **Eishan Nangia**.
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
 | `GET` | `/api/menu` | Fetch all available menu items (filtered by `?category=`) |
-| `POST` | `/api/otp/send` | Generates a 4-digit random OTP, saves it in SQLite with 5-min expiry, logs to console |
+| `POST` | `/api/auth/customer/send-code` | Generates 4-digit Email verification code & dispatches via email service |
+| `POST` | `/api/auth/customer/verify-code` | Validates email code & authenticates customer session |
+| `POST` | `/api/auth/customer/google` | Authenticates customer via Google Sign-In |
+| `POST` | `/api/otp/send` | Generates a 4-digit random OTP, saves in SQLite with 5-min expiry, dispatches via SMS service |
 | `POST` | `/api/otp/verify` | Validates customer OTP code against SQLite records |
 | `POST` | `/api/reservations` | Submit a new table booking |
 | `GET` | `/api/reviews` | Stream latest customer reviews |
@@ -152,5 +162,5 @@ This repository includes a ready-to-import Postman Collection file: `postman_col
 
 ## 👤 Author
 
-**Eishan, Gagan, Ansh, Harkirat**  
+**Eishan Nangia**  
 3rd-Year Computer Science / Software Engineering Student
